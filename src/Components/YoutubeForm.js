@@ -4,8 +4,10 @@
 
 // we set initialValues
 
+// formik.getFieldProps replaces the boilerplate code ''onsubmit,onchange,onblur'' etc.
+
 import React from 'react'
-import { useFormik } from 'formik'
+import { Formik, Form, Field, ErrorMessage } from 'formik'
 function YoutubeForm() {
   const initialValues = {
     name: '',
@@ -38,63 +40,34 @@ function YoutubeForm() {
     return errors
   }
 
-  const formik = useFormik({
-    initialValues,
-    onSubmit,
-    validate,
-  })
   return (
-    <div>
-      <form onSubmit={formik.handleSubmit}>
+    <Formik
+      initialValues={initialValues}
+      validate={validate}
+      onSubmit={onSubmit}
+    >
+      <Form>
         <div className='form-control'>
           <label htmlFor='name'>name</label>
-          <input
-            type='text'
-            id='name'
-            name='name'
-            onChange={formik.handleChange}
-            value={formik.values.name}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.name && formik.errors.name ? (
-            <div className='error'>{formik.errors.name}</div>
-          ) : null}
+          <Field type='text' id='name' name='name' />
+          <ErrorMessage name='name' />
         </div>
 
         <div className='form-control'>
           <label htmlFor='email'>email</label>
-          <input
-            type='email'
-            id='email'
-            name='email'
-            onChange={formik.handleChange}
-            value={formik.values.email}
-            onBlur={formik.handleBlur}
-          />
-          {formik.touched.email && formik.errors.email ? (
-            <div className='error'>{formik.errors.email}</div>
-          ) : null}
+          <Field type='email' id='email' name='email' />
+          <ErrorMessage name='email' />
         </div>
 
         <div className='form-control'>
           <label htmlFor='channel'>channel</label>
-          <input
-            type='text'
-            id='channel'
-            name='channel'
-            onChange={formik.handleChange}
-            value={formik.values.channel}
-            onBlur={formik.handleBlur}
-          />
-
-          {formik.touched.channel && formik.errors.channel ? (
-            <div className='error'>{formik.errors.channel}</div>
-          ) : null}
+          <Field type='text' id='channel' name='channel' />
+          <ErrorMessage name='channel' />
         </div>
 
         <button type='submit'>Submit</button>
-      </form>
-    </div>
+      </Form>
+    </Formik>
   )
 }
 
