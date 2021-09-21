@@ -8,7 +8,7 @@ import {
   FastField,
 } from 'formik'
 import * as Yup from 'yup'
-import { TextError } from './TextError'
+import TextError from './TextError'
 
 const initialValues = {
   name: 'Vishwas',
